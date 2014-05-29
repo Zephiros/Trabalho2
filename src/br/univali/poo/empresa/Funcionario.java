@@ -8,7 +8,7 @@ package trabalhom2.empresa;
 
 /**
  *
- * @author hls
+ * @author Heverton de Lemos - Alex Batista
  */
 public interface Funcionario
 {
