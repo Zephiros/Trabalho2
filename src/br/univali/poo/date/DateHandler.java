@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package trabalhom2.date;
+package br.univali.poo.date;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

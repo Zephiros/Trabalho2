@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package trabalhom2.empresa;
+package br.univali.poo.empresa;
 
 /**
  * Informações e metodos referente a empresa.
@@ -14,7 +8,14 @@ public class Empresa
 {
     private FolhaPagamento[] folhaPagamento;
     private String nome;
-    private int quantidadeFolhas = 0;
+    private int quantidadeFolhas;
+
+    /**
+     * Construtor. Inicia quantidade de folhas
+     */
+    public Empresa() {
+        this.quantidadeFolhas = 0;
+    }
     
     /**
      * Recupera nome da empresa
@@ -49,11 +50,8 @@ public class Empresa
      */
     public void setFolhaPagamento(FolhaPagamento folha)
     {
+        //INSERIR TRY...CATCH
         if(quantidadeFolhas < 100)
-        {
             this.folhaPagamento[quantidadeFolhas++] = new FolhaPagamento();
-        }else
-            System.out.println("oi");//algo para informar que ta cheia.
-            //ou criar uma exeção
     }
 }

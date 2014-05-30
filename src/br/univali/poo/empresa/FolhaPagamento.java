@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package trabalhom2.empresa;
+package br.univali.poo.empresa;
 
 /**
  * Informações e metodos referente a folha de pagamento da empresa
@@ -13,7 +7,15 @@ package trabalhom2.empresa;
 public class FolhaPagamento
 {
     private Funcionario[] funcionario;
-    private int quantidadeFuncionario = 0;
+    private int quantidadeFuncionario;
+
+    /**
+     * Construtor Folha de Pagamento.
+     * Iniciar a quantidade de funcionarios com 0
+     */
+    public FolhaPagamento() {
+        this.quantidadeFuncionario = 0;
+    }
     
     /**
      * Retorna os funcionarios
@@ -26,28 +28,27 @@ public class FolhaPagamento
     
     /**
      * Insere um funcionario.
-     * @param funcionario o funcionario.
      * @param tipo [1]para Regular, [2]para Diretor e [3]para Externo.
      * @param salarioL se o funcionario for externo deve ser inserido 
      * o salario dele, no caso dos outros tipos o salario é zero.
      */
-    public void setFuncionario(Funcionario funcionario, int tipo, float salarioL)
+    public void cadastraFuncionario(int tipo, float salarioL)
     {
         if (quantidadeFuncionario < 100)
         {
             switch(tipo)
             {
-                case 1: this.funcionario[quantidadeFuncionario++] = new Regular();
+                case 1: this.funcionario[this.quantidadeFuncionario++] = new Regular();
                     break;
                     
-                case 2: this.funcionario[quantidadeFuncionario++] = new Diretor();
+                case 2: this.funcionario[this.quantidadeFuncionario++] = new Diretor();
                     break;
                     
-                case 3: this.funcionario[quantidadeFuncionario++] = new Externo(salarioL);
+                case 3: this.funcionario[this.quantidadeFuncionario++] = new Externo(salarioL);
                     break;
+                    
+                default: break;
             }
-        }else
-            System.out.println("oi");//mesmo caso de empresa
-           
+        }
     }
 }

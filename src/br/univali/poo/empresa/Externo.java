@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package trabalhom2.empresa;
+package br.univali.poo.empresa;
 
 /**
  * Informações e metodos referente ao funcionario externo
@@ -16,6 +10,10 @@ public class Externo implements Funcionario
     private String cpf;
     private float salarioLiquido;
 
+    /**
+     * Construtor
+     * @param salarioL Funcionario Externo precisa de um salario inicial
+     */
     Externo(float salarioL)
     {
         this.salarioLiquido = salarioL;
@@ -58,7 +56,7 @@ public class Externo implements Funcionario
     }
     
     /**
-     *
+     * Insere cpf do funcionario
      * @param cpf cpf do fncionario.
      */
     public void setCpf(String cpf)
@@ -66,21 +64,31 @@ public class Externo implements Funcionario
         this.cpf = cpf;
     }
     
+    /**
+     * insere salario liquido do funcionario
+     * @param salarioL salario liquido do funcionario
+     */
     public void setSalarioLiquido(float salarioL)
     {
         this.salarioLiquido = salarioL;
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o valor de desconto do
+     * imposto de Renda sobre um salario
+     * Salário líquido               Alíquota %
+     *   Até 1.499,15                   -
+     *   De 1.499,16 até 2.246,75      7,5
+     *   De 2.246,76 até 2.995,70     15,0
+     *   De 2.995,71 até 3.743,19     22,5
+     *   Acima de 3.743,19            27,5
+     * @param salario salario a ser calculado o imposto sobre
+     * @return valor do desconto
+     */
     @Override
     public float calculaImpostoDeRenda(float salario)
     {
-        //Salário líquido          / Alíquota %
-        //Até 1.499,15             / -
-        //De 1.499,16 até 2.246,75 / 7,5
-        //De 2.246,76 até 2.995,70 / 15,0
-        //De 2.995,71 até 3.743,19 / 22,5
-        //Acima de 3.743,19        / 27,5
-        
         if(salario <= 1499.15f)
             return 0f;
         else
@@ -93,22 +101,32 @@ public class Externo implements Funcionario
             if(salario >= 2995.71f && salario <= 3743.19f)
                 return (salario * 0.225f);
         else
-            //if(salario > 3743.19f)
-                return (salario * 0.275f);
+            return (salario * 0.275f);
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o desconto de INSS em cima de um salario
+     * 11% sobre o salário líquido, com teto máximo de R$ 482,93.
+     * @param salario salario a ser calculado
+     * @return valor de desconto
+     */
     @Override
     public float calculaINSS(float salario)
     {
-        //11% sobre o salário líquido, com teto máximo de R$ 482,93.
         float taxa = (salario * 0.11f);
         if(taxa <= 482.93)
-        {
             return taxa;
-        }else
-            return 482.93f;
+        return 482.93f;
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o salario liquido de um Funcionario Externo
+     * O salario liquido não altera
+     * @param salario salario a ser calculado
+     * @return valor do salario
+     */
     @Override
     public float calculaSalarioLiquido(float salario)
     {

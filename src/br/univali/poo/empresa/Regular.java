@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package trabalhom2.empresa;
+package br.univali.poo.empresa;
 
 import java.util.Calendar;
 
 /**
- *
+ * Class Regular
  * @author Heverton de Lemos - Alex Batista
  */
 public class Regular implements Funcionario
@@ -20,88 +14,150 @@ public class Regular implements Funcionario
     private Calendar dataAdmissao;
     private float salarioBase;
     private float horaTrabalhada;
-    private ContraCheque contraCheque;
+    private ContraCheque[] contraCheque;
     
+    /**
+     * Metodo para acessar o nome do Funcionario
+     * @return nome do Funcionario 
+     */
     public String getNome()
     {
         return this.nome;
     }
     
+    /**
+     * Metodo para acessar o cpf do Funcionario
+     * @return cpf do Funcionario
+     */
     public String getCpf()
     {
         return this.cpf;
     }
     
+    /**
+     * Metodo para acessar o departamento do Funcionario
+     * @return departamento do Funcionario
+     */
     public String getDepartamento()
     {
         return this.departamento;
     }
     
+    /**
+     * Metodo para acessar a Data de Admissao do Funcionario
+     * @return Data de Admissao do Funcionario
+     */
     public Calendar getDataAdmissao()
     {
         return this.dataAdmissao;
     }
     
+    /**
+     * Metodo para acessar o salario base do Funcionario
+     * @return salario base do Funcionario
+     */
     public float getSalarioBase()
     {
         return this.salarioBase;
     }
     
+    /**
+     * Metodo para acessar as horas trabalhadas do Funcionario
+     * @return horas trabalhadas do Funcionario
+     */
     public float getHoraTrabalhada()
     {
         return this.horaTrabalhada;
     }
     
-    public ContraCheque getContracheques()
+    /**
+     * Metodo para acessar os contra cheques dos Funcionario
+     * @return contra cheques do Funcionario
+     */
+    public ContraCheque[] getContracheques()
     {
         return this.contraCheque;
     }
     
+    /**
+     * Metodo para modificar o nome do Funcionario
+     * @param nome nome do Funcionario
+     */
     public void setNome(String nome)
     {
         this.nome = nome;
     }
     
+    /**
+     * Metodo para modificar o cpf do Funcionario
+     * @param cpf cpf do Funcionario
+     */
     public void setCpf(String cpf)
     {
         this.cpf = cpf;
     }
     
+    /**
+     * Metodo para modificar o departamento do Funcionario
+     * @param departamento departamento do Funcionario
+     */
     public void setDepartamento(String departamento)
     {
         this.departamento = departamento;
     }
     
+    /**
+     * Metodo para modificar a data de admissao do Funcionario
+     * @param dataAdmissao data de admissao do Funcionario
+     */
     public void setDataAdmissao(Calendar dataAdmissao)
     {
         this.dataAdmissao = dataAdmissao;
     }
     
-    public void setSalarioBase(float salarioB)
+   /**
+    * Metodo para modificar o salario base do Funcionario 
+    * @param salarioBase salario base do Funcionario 
+    */
+    public void setSalarioBase(float salarioBase)
     {
-        this.salarioBase = salarioB;
+        this.salarioBase = salarioBase;
     }
     
+    /**
+     * Metodo para modificar as horas trabalhadas do Funcionario
+     * @param horaTrabalhada horas trabalhadas do Funcionario
+     */
     public void setHoraTrabalhada(float horaTrabalhada)
     {
         this.horaTrabalhada = horaTrabalhada;
     }
     
-    public void setContracheques(ContraCheque contraCheque)
+    /**
+     * Metodo para modificar os contra cheques do Funcionario
+     * @param contraCheque contra cheques do Funcionario
+     */
+    public void setContracheques(ContraCheque[] contraCheque)
     {
         this.contraCheque = contraCheque;
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o valor de desconto do
+     * imposto de Renda sobre um salario
+     * Salário líquido               Alíquota %
+     *   Até 1.499,15                   -
+     *   De 1.499,16 até 2.246,75      7,5
+     *   De 2.246,76 até 2.995,70     15,0
+     *   De 2.995,71 até 3.743,19     22,5
+     *   Acima de 3.743,19            27,5
+     * @param salario salario a ser calculado o imposto sobre
+     * @return valor do desconto
+     */
     @Override
     public float calculaImpostoDeRenda(float salario)
     {
-        //Salário líquido          / Alíquota %
-        //Até 1.499,15             / -
-        //De 1.499,16 até 2.246,75 / 7,5
-        //De 2.246,76 até 2.995,70 / 15,0
-        //De 2.995,71 até 3.743,19 / 22,5
-        //Acima de 3.743,19        / 27,5
-        
         if(salario <= 1499.15f)
             return 0f;
         else
@@ -114,31 +170,40 @@ public class Regular implements Funcionario
             if(salario >= 2995.71f && salario <= 3743.19f)
                 return (salario * 0.225f);
         else
-            //if(salario > 3743.19f)
-                return (salario * 0.275f);
+            return (salario * 0.275f);
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o desconto de INSS em cima de um salario
+     * 11% sobre o salário líquido, com teto máximo de R$ 482,93.
+     * @param salario salario a ser calculado
+     * @return valor de desconto
+     */
     @Override
     public float calculaINSS(float salario)
     {
-        //11% sobre o salário líquido, com teto máximo de R$ 482,93.
         float taxa = (salario * 0.11f);
         if(taxa <= 482.93)
-        {
             return taxa;
-        }else
-            return 482.93f;
+        return 482.93f;
     }
     
+    /**
+     * @see br.univali.poo.empresa.Funcionario;
+     * Metodo para calcular o salario liquido de um Funcionario apartir de
+     * um salario base. Base de horas - 160H
+     * @param salario salario base
+     * @return valor do salario liquido
+     */
     @Override
     public float calculaSalarioLiquido(float salario)
     {
         float taxaHorario = (getHoraTrabalhada() * 100) / 160;
         if(taxaHorario <= 90)
             return (getSalarioBase() / 160) * getHoraTrabalhada();
-        else if(taxaHorario > 100){
+        else if(taxaHorario > 100)
             return getSalarioBase() + ((getSalarioBase() / 2) * getHoraTrabalhada() - 160);
-        }            
         else
             return getSalarioBase();
     }
