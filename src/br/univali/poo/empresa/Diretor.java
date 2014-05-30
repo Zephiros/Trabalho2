@@ -22,4 +22,14 @@ public class Diretor extends Regular
         }
         return 0f;
     }
+    
+    /**
+     * @see br.univali.poo.empresa.Regular
+     * Metodo chama calcularSalarioLiquidoComDesconto e adiciona o bonus de diretor 
+     * @return salario liquido final
+     */
+    @Override
+    public float calculaSalarioLiquidoComDesconto(){
+        return super.calculaSalarioLiquidoComDesconto() + getAnuenio();
+    }
 }

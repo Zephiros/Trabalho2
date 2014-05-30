@@ -132,4 +132,19 @@ public class Externo implements Funcionario
     {
         return salario;
     }
+    
+    /**
+     * @see br.univali.poo.empresa.Funcionario
+     * Metodo para calcular o salario liquido final de um funcionario
+     * Aplicado o salario liquido inicial com os descontos de imposto de renda e INSS
+     * @return salario liquido final
+     */
+    @Override
+    public float calculaSalarioLiquidoComDesconto()
+    {
+        float salarioLiquidoInicial = calculaSalarioLiquido(getsalarioLiquido());
+        return salarioLiquidoInicial -
+                calculaImpostoDeRenda(salarioLiquidoInicial) -
+                calculaINSS(salarioLiquidoInicial);
+    }
 }

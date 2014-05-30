@@ -26,4 +26,10 @@ public interface Funcionario
      * @return salario liquido
      */
     public float calculaSalarioLiquido(float salario);
+    
+    /**
+     * Interface calculaSalarioLiquidoComDesconto. para calculo do salario liquido final
+     * @return salario liquido final
+     */
+    public float calculaSalarioLiquidoComDesconto();
 }
