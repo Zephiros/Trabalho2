@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package trabalhom2;
+package br.univali.poo.trabalhom2;
 
 /**
  *
- * @author hls
+ * @author Heverton de Lemos - Alex Batista
  */
 public class TrabalhoM2 {
 
