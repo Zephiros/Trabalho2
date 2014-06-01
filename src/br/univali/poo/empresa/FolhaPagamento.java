@@ -53,12 +53,13 @@ public class FolhaPagamento
         return this.funcionario.size();
     }
     
-    /*public float totalFolhaPagamento()
+    public float totalFolhaPagamento()
     {
-        float total;
-        for(int i = 0; i <= this.quantidadeFuncionario; i++)
+        float total = 0;
+        for(int i = 0; i <= this.funcionario.size(); i++)
         {
-            total = funcionario[i].
+            total = total + funcionario.get(i).calculaSalarioLiquidoComDesconto();
         }
-    }*/
+        return total;
+    }
 }

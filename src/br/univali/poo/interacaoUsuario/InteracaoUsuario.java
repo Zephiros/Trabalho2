@@ -84,6 +84,11 @@ public class InteracaoUsuario {
     //Permitir a impressão da folha de pagamento informando o nome dos funcionários e o seus respectivos salários (em ordem crescente de salário).
     
     //Permitir a visualização do valor total da folha de pagamento.
+    public void totalFolhaPagamento()
+    {
+       System.out.println("O total da folha de pagamento eh: ");
+       System.out.println(empresa.getFolhaPagamento().totalFolhaPagamento());
+    }
     
     //Permitir a consulta do funcionário (independente do tipo de funcionário) que recebe o maior salário.
     public void maiorSalario()
