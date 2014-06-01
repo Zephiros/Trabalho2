@@ -47,18 +47,18 @@ public class InteracaoUsuario {
         
         for(int i = 0; i <= folhaPagamento.getQuantidadeFuncionario(); i++)
         {
-            int tipo = tipoFuncionario(funcionario[i]);
+            int tipo = tipoFuncionario(funcionario.get(i));
             
             switch(tipo)
             {
-                case 1: System.out.println(((Regular) funcionario[i]).getNome());
-                        System.out.println(((Regular) funcionario[i]).getSalarioBase());
+                case 1: System.out.println(((Regular) funcionario.get(i)).getNome());
+                        System.out.println(((Regular) funcionario.get(i)).getSalarioBase());
                     break;
-                case 2: System.out.println(((Diretor) funcionario[i]).getNome());
-                        System.out.println(((Diretor) funcionario[i]).getSalarioBase());
+                case 2: System.out.println(((Diretor) funcionario.get(i)).getNome());
+                        System.out.println(((Diretor) funcionario.get(i)).getSalarioBase());
                     break;
-                case 3: System.out.println(((Externo) funcionario[i]).getNome());
-                        System.out.println(((Externo) funcionario[i]).getsalarioLiquido());
+                case 3: System.out.println(((Externo) funcionario.get(i)).getNome());
+                        System.out.println(((Externo) funcionario.get(i)).getsalarioLiquido());
                     break;
             }
         }
