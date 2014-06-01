@@ -88,7 +88,34 @@ public class InteracaoUsuario {
     //Permitir a consulta do funcionário (independente do tipo de funcionário) que recebe o maior salário.
     public void maiorSalario()
     {
+        funcionario = empresa.getFolhaPagamento().getFuncionarios();
         
+        Funcionario func1 = funcionario.get(0);
+        Funcionario func2 = funcionario.get(1);
+        int i = 1;
+            
+        while(i <= funcionario.size())
+        {   
+            if(func1.calculaSalarioLiquidoComDesconto() > func2.calculaSalarioLiquidoComDesconto())
+                func2 = funcionario.get(i++);
+            else
+            {
+                func1 = func2;
+                func2 = funcionario.get(i++);
+            }
+        }
+        switch(tipoFuncionario(func1))
+        {
+            case 1: System.out.println("Nome: "+((Regular) func1).getNome());
+                    System.out.println("Salario: "+((Regular) func1).calculaSalarioLiquidoComDesconto());
+                break;
+            case 2: System.out.println("Nome: "+((Diretor) func1).getNome());
+                    System.out.println("Salario: "+((Diretor) func1).calculaSalarioLiquidoComDesconto());
+                break;
+            case 3: System.out.println("Nome: "+((Externo) func1).getNome());
+                    System.out.println("Salario: "+((Externo) func1).calculaSalarioLiquidoComDesconto());
+                break;
+        }
     }
     
     //Permitir a consulta de todos os funcionários alocados em um determinado departamento da empresa.
