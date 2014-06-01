@@ -51,4 +51,18 @@ public class FolhaPagamento
             }
         }
     }
+    
+    public int getQuantidadeFuncionario()
+    {
+        return this.quantidadeFuncionario;
+    }
+    
+    /*public float totalFolhaPagamento()
+    {
+        float total;
+        for(int i = 0; i <= this.quantidadeFuncionario; i++)
+        {
+            total = funcionario[i].
+        }
+    }*/
 }

@@ -18,6 +18,19 @@ public class Empresa
     }
     
     /**
+     * Construtor. 
+     * Inicia a empresa com o nome e cria uma folha de pagamento.
+     * Inicia a quantidade de folhas para uma.
+     * @param nome nome da empresa.
+     */
+    public Empresa(String nome)
+    {
+        this.nome = nome;
+        this.quantidadeFolhas = 1;
+        setFolhaPagamento();
+    }
+    
+    /**
      * Recupera nome da empresa
      * @return nome da empresa
      */
@@ -36,6 +49,25 @@ public class Empresa
     }
     
     /**
+     * Retorna uma folha de pagamento especifica.
+     * @param folha numero da folha de pagamento de 0 à 11 (meses do ano)
+     * @return a folha de pagamento selecionada.
+     */
+    public FolhaPagamento getFolhaPagamento(int folha)
+    {
+        return this.folhaPagamento[folha];
+    }
+    
+    /**
+     * Retorna a ultima folha de pagamento da empresa.
+     * @return ultima folha de pagamento criada.
+     */
+    public FolhaPagamento getUltimaFolhaPagamento()
+    {
+        return this.folhaPagamento[this.quantidadeFolhas];
+    }
+    
+    /**
      * Insere o nome da empresa
      * @param nome nome da empresa
      */
@@ -46,9 +78,8 @@ public class Empresa
     
     /**
      * Insere uma nova folha de pagamento.
-     * @param folha folha de pagamento nova
      */
-    public void setFolhaPagamento(FolhaPagamento folha)
+    public void setFolhaPagamento()
     {
         //INSERIR TRY...CATCH
         if(quantidadeFolhas < 100)
