@@ -1,6 +1,7 @@
 package br.univali.poo.empresa;
 
 import br.univali.poo.date.DateHandler;
+import java.util.Calendar;
 
 /**
  * Metodos do diretor
@@ -8,10 +9,24 @@ import br.univali.poo.date.DateHandler;
  */
 public class Diretor extends Regular
 {
-
+    /**
+     * @see br.univali.poo.empresa.Regular
+     * Construtor
+     * @param salarioBase salario
+     */
     public Diretor(float salarioBase) {
         super(salarioBase);
-    }    
+    }
+    
+    /**
+     * @see br.univali.poo.empresa.Regular
+     * Construtor
+     * @param salarioBase salario
+     * @param dataAdmissao data de admissao
+     */
+    public Diretor(float salarioBase, Calendar dataAdmissao){
+        super(salarioBase, dataAdmissao);
+    }
     
     /**
      * Calcula o anuenio do diretor conforme seu tempo de serviço.

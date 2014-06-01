@@ -6,15 +6,12 @@ package br.univali.poo.empresa;
  */
 public class Empresa 
 {
-    private FolhaPagamento[] folhaPagamento;
+    private FolhaPagamento folhaPagamento;
     private String nome;
-    private int quantidadeFolhas;
-
-    /**
-     * Construtor. Inicia quantidade de folhas
-     */
-    public Empresa() {
-        this.quantidadeFolhas = 0;
+    
+    public Empresa()
+    {
+        this(null);
     }
     
     /**
@@ -26,8 +23,7 @@ public class Empresa
     public Empresa(String nome)
     {
         this.nome = nome;
-        this.quantidadeFolhas = 1;
-        setFolhaPagamento();
+        this.folhaPagamento = new FolhaPagamento();
     }
     
     /**
@@ -43,28 +39,9 @@ public class Empresa
      * Retorna as folhas de pagemento da empresa.
      * @return as folhas de pagamento da empresa
      */
-    public FolhaPagamento[] getFolhasPagamento()
+    public FolhaPagamento getFolhaPagamento()
     {
         return this.folhaPagamento;
-    }
-    
-    /**
-     * Retorna uma folha de pagamento especifica.
-     * @param folha numero da folha de pagamento de 0 à 11 (meses do ano)
-     * @return a folha de pagamento selecionada.
-     */
-    public FolhaPagamento getFolhaPagamento(int folha)
-    {
-        return this.folhaPagamento[folha];
-    }
-    
-    /**
-     * Retorna a ultima folha de pagamento da empresa.
-     * @return ultima folha de pagamento criada.
-     */
-    public FolhaPagamento getUltimaFolhaPagamento()
-    {
-        return this.folhaPagamento[this.quantidadeFolhas];
     }
     
     /**
@@ -78,11 +55,10 @@ public class Empresa
     
     /**
      * Insere uma nova folha de pagamento.
+     * @param folha folha de pagamento
      */
-    public void setFolhaPagamento()
+    public void setFolhaPagamento(FolhaPagamento folha)
     {
-        //INSERIR TRY...CATCH
-        if(quantidadeFolhas < 100)
-            this.folhaPagamento[quantidadeFolhas++] = new FolhaPagamento();
+        this.folhaPagamento = folha;
     }
 }

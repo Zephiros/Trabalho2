@@ -2,6 +2,7 @@ package br.univali.poo.empresa;
 
 import br.univali.poo.date.DateHandler;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Class Regular
@@ -15,7 +16,7 @@ public class Regular implements Funcionario
     private Calendar dataAdmissao;
     private float salarioBase;
     private float horaTrabalhada;
-    private ContraCheque[] contraCheque;
+    private List<ContraCheque> contraCheque;
 
     public Regular(float salarioBase){
         this.salarioBase = salarioBase;
@@ -85,7 +86,7 @@ public class Regular implements Funcionario
      * Metodo para acessar os contra cheques dos Funcionario
      * @return contra cheques do Funcionario
      */
-    public ContraCheque[] getContracheques()
+    public List<ContraCheque> getContracheques()
     {
         return this.contraCheque;
     }
@@ -148,7 +149,7 @@ public class Regular implements Funcionario
      * Metodo para modificar os contra cheques do Funcionario
      * @param contraCheque contra cheques do Funcionario
      */
-    public void setContracheques(ContraCheque[] contraCheque)
+    public void setContracheques(List<ContraCheque> contraCheque)
     {
         this.contraCheque = contraCheque;
     }
