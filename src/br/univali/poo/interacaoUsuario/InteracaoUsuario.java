@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class InteracaoUsuario {
     Empresa empresa;
-    FolhaPagamento folhaPagamento;
     List<Funcionario> funcionario;
     
     /**
@@ -55,17 +54,15 @@ public class InteracaoUsuario {
     //Permitir a inclusão de funcionários.
     public void incluirFuncionario(int tipo, float salarioL)
     {
-        folhaPagamento = empresa.getFolhaPagamento();
-        folhaPagamento.cadastraFuncionario(tipo, salarioL);
+        empresa.getFolhaPagamento().cadastraFuncionario(tipo, salarioL);
     }
     
     //Permitir a impressão da folha de pagamento informando o nome dos funcionários e o seus respectivos salários.
     public void imprimiFolhaPagamento()
     {
-        folhaPagamento = empresa.getFolhaPagamento();
-        funcionario = folhaPagamento.getFuncionarios();
+        funcionario = empresa.getFolhaPagamento().getFuncionarios();
         
-        for(int i = 0; i <= folhaPagamento.getQuantidadeFuncionario(); i++)
+        for(int i = 0; i <= funcionario.size(); i++)
         {
             int tipo = tipoFuncionario(funcionario.get(i));
             
