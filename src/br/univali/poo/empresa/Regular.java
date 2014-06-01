@@ -1,5 +1,6 @@
 package br.univali.poo.empresa;
 
+import br.univali.poo.date.DateHandler;
 import java.util.Calendar;
 
 /**
@@ -15,6 +16,16 @@ public class Regular implements Funcionario
     private float salarioBase;
     private float horaTrabalhada;
     private ContraCheque[] contraCheque;
+
+    public Regular(float salarioBase){
+        this.salarioBase = salarioBase;
+        this.dataAdmissao = DateHandler.today();
+    }
+    
+    public Regular(float salarioBase, Calendar dataAdmissao){
+        this.salarioBase = salarioBase;
+        this.dataAdmissao = dataAdmissao;
+    }
     
     /**
      * Metodo para acessar o nome do Funcionario

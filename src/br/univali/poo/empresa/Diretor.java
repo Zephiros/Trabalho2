@@ -9,6 +9,10 @@ import br.univali.poo.date.DateHandler;
 public class Diretor extends Regular
 {
 
+    public Diretor(float salarioBase) {
+        super(salarioBase);
+    }    
+    
     /**
      * Calcula o anuenio do diretor conforme seu tempo de serviço.
      * @return a porcentagem referente ao anuenio.

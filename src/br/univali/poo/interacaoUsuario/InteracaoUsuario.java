@@ -12,6 +12,7 @@ import br.univali.poo.empresa.Externo;
 import br.univali.poo.empresa.FolhaPagamento;
 import br.univali.poo.empresa.Funcionario;
 import br.univali.poo.empresa.Regular;
+import java.util.List;
 
 /**
  *  Classe que faz a interação do usuário com as classes de processamento e de entidade.
@@ -20,7 +21,7 @@ import br.univali.poo.empresa.Regular;
 public class InteracaoUsuario {
     Empresa empresa;
     FolhaPagamento folhaPagamento;
-    Funcionario[] funcionario;
+    List<Funcionario> funcionario;
     
     /**
      * Cria uma nova empresa, com nome e uma folha de pagamento zerada.

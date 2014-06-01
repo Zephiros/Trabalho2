@@ -1,27 +1,23 @@
 package br.univali.poo.empresa;
 
+import java.util.List;
+
 /**
  * Informações e metodos referente a folha de pagamento da empresa
  * @author Heverton de Lemos - Alex Batista
  */
 public class FolhaPagamento
 {
-    private Funcionario[] funcionario;
-    private int quantidadeFuncionario;
+    private List<Funcionario> funcionario;
 
-    /**
-     * Construtor Folha de Pagamento.
-     * Iniciar a quantidade de funcionarios com 0
-     */
     public FolhaPagamento() {
-        this.quantidadeFuncionario = 0;
     }
     
     /**
      * Retorna os funcionarios
      * @return os funcionarios
      */
-    public Funcionario[] getFuncionarios()
+    public List<Funcionario> getFuncionarios()
     {
         return this.funcionario;
     }
@@ -29,32 +25,32 @@ public class FolhaPagamento
     /**
      * Insere um funcionario.
      * @param tipo [1]para Regular, [2]para Diretor e [3]para Externo.
-     * @param salarioL se o funcionario for externo deve ser inserido 
-     * o salario dele, no caso dos outros tipos o salario é zero.
+     * @param salario salario do funcionario
      */
-    public void cadastraFuncionario(int tipo, float salarioL)
-    {
-        if (quantidadeFuncionario < 100)
+    public void cadastraFuncionario(int tipo, float salario)
+    {        
+        switch(tipo)
         {
-            switch(tipo)
-            {
-                case 1: this.funcionario[this.quantidadeFuncionario++] = new Regular();
-                    break;
+            case 1: funcionario.add(new Regular(salario));
+                break;
+                 
+            case 2: funcionario.add(new Diretor(salario));
+                break;
+                  
+            case 3: funcionario.add(new Externo(salario));
+                break;
                     
-                case 2: this.funcionario[this.quantidadeFuncionario++] = new Diretor();
-                    break;
-                    
-                case 3: this.funcionario[this.quantidadeFuncionario++] = new Externo(salarioL);
-                    break;
-                    
-                default: break;
-            }
-        }
+            default: break;
+        }    
     }
     
+    /**
+     * Metodo para retornar a quantidade de funcionarios da folha de Pagamento
+     * @return quantidade de funcionarios
+     */
     public int getQuantidadeFuncionario()
     {
-        return this.quantidadeFuncionario;
+        return this.funcionario.size();
     }
     
     /*public float totalFolhaPagamento()
