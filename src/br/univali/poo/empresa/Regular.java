@@ -3,6 +3,7 @@ package br.univali.poo.empresa;
 import br.univali.poo.date.DateHandler;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Class Regular
@@ -18,11 +19,20 @@ public class Regular implements Funcionario
     private float horaTrabalhada;
     private List<ContraCheque> contraCheque;
 
+    /**
+     * Construtor que insere a data do dia para data de admissão.
+     * @param salarioBase salario base do funcionario.
+     */
     public Regular(float salarioBase){
         this.salarioBase = salarioBase;
         this.dataAdmissao = DateHandler.today();
     }
     
+    /**
+     * Construtor que pode ser informada a data da admisão.
+     * @param salarioBase salario base do funcionario.
+     * @param dataAdmissao data de admissão do funcionario.
+     */
     public Regular(float salarioBase, Calendar dataAdmissao){
         this.salarioBase = salarioBase;
         this.dataAdmissao = dataAdmissao;
@@ -88,7 +98,7 @@ public class Regular implements Funcionario
      */
     public List<ContraCheque> getContracheques()
     {
-        return this.contraCheque;
+            return this.contraCheque;
     }
     
     /**
@@ -234,4 +244,12 @@ public class Regular implements Funcionario
                 calculaINSS(salarioLiquidoInicial);
     }
     
+    /**
+     * Verifica se existe contracheque.
+     * @return retorna true ou false.
+     */
+    public boolean existeContraCheque()
+    {
+        return contraCheque != null;
+    }
 }

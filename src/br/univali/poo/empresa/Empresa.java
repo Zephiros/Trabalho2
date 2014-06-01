@@ -61,4 +61,13 @@ public class Empresa
     {
         this.folhaPagamento = folha;
     }
+    
+    /**
+     * Verifica se existe folha de pagamento.
+     * @return retorna true ou false.
+     */
+    public boolean existeFolhaPagamento()
+    {
+        return folhaPagamento != null;
+    }
 }

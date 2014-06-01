@@ -53,6 +53,10 @@ public class FolhaPagamento
         return this.funcionario.size();
     }
     
+    /**
+     * Calcula o valor total da folha de pagamento.
+     * @return valor total da folha de pagamento
+     */
     public float totalFolhaPagamento()
     {
         float total = 0;
@@ -61,5 +65,14 @@ public class FolhaPagamento
             total = total + funcionario.get(i).calculaSalarioLiquidoComDesconto();
         }
         return total;
+    }
+    
+    /**
+     * Verifica se existe funcionario.
+     * @return return true ou false.
+     */
+    public boolean existeFuncionario()
+    {
+        return funcionario != null;
     }
 }
