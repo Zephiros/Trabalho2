@@ -54,17 +54,27 @@ public class InteracaoUsuario {
      * Metodo para inclusão de funcionários.
      * @param tipo tipo de funcionario [1]regular, [2]diretor e [3]externo.
      * @param salario salario base do funcionario
+     * @param nome nome do funcionario.
      */
-    public void incluirFuncionario(int tipo, float salario)
+    public void incluirFuncionario(int tipo, float salario, String nome)
     {
         empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario);
+        switch(tipo)
+            {
+                case 1: ((Regular) funcionario).setNome(nome);
+                    break;
+                case 2: ((Diretor) funcionario).setNome(nome);
+                    break;
+                case 3: ((Externo) funcionario).setNome(nome);
+                    break;
+            }
     }
     
     /**
      * Metodo que realiza a impressão da folha de pagamento 
      * informando o nome dos funcionários e o seus respectivos salários.
      */
-    public void imprimiFolhaPagamento()
+    public void imprimirFolhaPagamento()
     {
         funcionario = empresa.getFolhaPagamento().getFuncionarios();
   
@@ -91,7 +101,7 @@ public class InteracaoUsuario {
      * Metodo que realiza a impressão da folha de pagamento informando 
      * o nome dos funcionários e o seus respectivos salários (em ordem crescente de salário).
      */
-    public void imprimirFolhaDePagamento()
+    public void imprimirFolhaDePagamentoOrdemCrescente()
     {
         List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
         quickSort(lista, 0, lista.size() - 1);
