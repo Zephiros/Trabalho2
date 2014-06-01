@@ -61,7 +61,7 @@ public class InteracaoUsuario {
     public void imprimiFolhaPagamento()
     {
         funcionario = empresa.getFolhaPagamento().getFuncionarios();
-        
+  
         for(int i = 0; i <= funcionario.size(); i++)
         {
             int tipo = tipoFuncionario(funcionario.get(i));
@@ -82,7 +82,11 @@ public class InteracaoUsuario {
     }
     
     //Permitir a impressão da folha de pagamento informando o nome dos funcionários e o seus respectivos salários (em ordem crescente de salário).
-    
+    public void imprimirFolhaDePagamento()
+    {
+        List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
+        quickSort(lista, 0, lista.size() - 1);
+    }
     //Permitir a visualização do valor total da folha de pagamento.
     public void totalFolhaPagamento()
     {
@@ -146,5 +150,40 @@ public class InteracaoUsuario {
                 break;
             }
         }
+    }
+    
+    private int partition(List<Funcionario> lista, int left, int right)
+    {
+        int i = left, j = right;
+        Funcionario tmp;
+          
+        Funcionario pivot = lista.get((left + right) / 2);
+
+        while (i <= j) {
+                while (lista.get(i).calculaSalarioLiquidoComDesconto() < pivot.calculaSalarioLiquidoComDesconto())
+                      i++;
+                while (lista.get(i).calculaSalarioLiquidoComDesconto() > pivot.calculaSalarioLiquidoComDesconto())
+                      j--;
+                if (i <= j) {
+                    tmp = lista.get(i);     
+                    lista.set(i, lista.get(j));
+                    lista.set(j, tmp);
+                    i++;
+                    j--;
+                }
+        }
+        return i;
+    }
+
+ 
+
+    private void quickSort(List<Funcionario> lista, int left, int right) {
+
+          int index = partition(lista, left, right);
+
+          if (left < index - 1)
+                quickSort(lista, left, index - 1);
+          if (index < right)
+                quickSort(lista, index, right);
     }
 }
