@@ -92,5 +92,27 @@ public class InteracaoUsuario {
     }
     
     //Permitir a consulta de todos os funcionários alocados em um determinado departamento da empresa.
-
+    public void funcionariosPorDepartamento(String departamento){
+        
+        funcionario = empresa.getFolhaPagamento().getFuncionarios();
+        
+        for (Funcionario funcionario1 : funcionario) {
+            int tipo = tipoFuncionario(funcionario1);
+            switch (tipo) {
+                case 1:
+                    if (((Regular) funcionario1).getDepartamento().equalsIgnoreCase(departamento)) {
+                        System.out.println("Nome: " + ((Regular) funcionario1).getNome());
+                    }
+                    break;
+                case 2:
+                    if (((Diretor) funcionario1).getDepartamento().equalsIgnoreCase(departamento)) {
+                        System.out.println("Nome: " + ((Diretor) funcionario1).getNome());
+                    }
+                    break;
+                case 3:
+            default:
+                break;
+            }
+        }
+    }
 }
