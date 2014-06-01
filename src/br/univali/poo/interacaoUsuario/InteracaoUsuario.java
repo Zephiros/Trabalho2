@@ -9,7 +9,6 @@ package br.univali.poo.interacaoUsuario;
 import br.univali.poo.empresa.Diretor;
 import br.univali.poo.empresa.Empresa;
 import br.univali.poo.empresa.Externo;
-import br.univali.poo.empresa.FolhaPagamento;
 import br.univali.poo.empresa.Funcionario;
 import br.univali.poo.empresa.Regular;
 import java.util.List;
@@ -51,13 +50,20 @@ public class InteracaoUsuario {
         this.empresa = new Empresa(nome);
     }
     
-    //Permitir a inclusão de funcionários.
-    public void incluirFuncionario(int tipo, float salarioL)
+    /**
+     * Metodo para inclusão de funcionários.
+     * @param tipo tipo de funcionario [1]regular, [2]diretor e [3]externo.
+     * @param salario salario base do funcionario
+     */
+    public void incluirFuncionario(int tipo, float salario)
     {
-        empresa.getFolhaPagamento().cadastraFuncionario(tipo, salarioL);
+        empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario);
     }
     
-    //Permitir a impressão da folha de pagamento informando o nome dos funcionários e o seus respectivos salários.
+    /**
+     * Metodo que realiza a impressão da folha de pagamento 
+     * informando o nome dos funcionários e o seus respectivos salários.
+     */
     public void imprimiFolhaPagamento()
     {
         funcionario = empresa.getFolhaPagamento().getFuncionarios();
@@ -81,20 +87,28 @@ public class InteracaoUsuario {
         }
     }
     
-    //Permitir a impressão da folha de pagamento informando o nome dos funcionários e o seus respectivos salários (em ordem crescente de salário).
+    /**
+     * Metodo que realiza a impressão da folha de pagamento informando 
+     * o nome dos funcionários e o seus respectivos salários (em ordem crescente de salário).
+     */
     public void imprimirFolhaDePagamento()
     {
         List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
         quickSort(lista, 0, lista.size() - 1);
     }
-    //Permitir a visualização do valor total da folha de pagamento.
+    
+    /**
+     * Metodo que imprime o valor total da folha de pagamento.
+     */
     public void totalFolhaPagamento()
     {
        System.out.println("O total da folha de pagamento eh: ");
        System.out.println(empresa.getFolhaPagamento().totalFolhaPagamento());
     }
     
-    //Permitir a consulta do funcionário (independente do tipo de funcionário) que recebe o maior salário.
+    /**
+     * Metodo que imprime o funcionário que recebe o maior salário.
+     */
     public void maiorSalario()
     {
         funcionario = empresa.getFolhaPagamento().getFuncionarios();
@@ -127,7 +141,10 @@ public class InteracaoUsuario {
         }
     }
     
-    //Permitir a consulta de todos os funcionários alocados em um determinado departamento da empresa.
+    /**
+     * Metodo que imprime todos os funcionários alocados em um determinado departamento da empresa.
+     * @param departamento departamento que deseja ver os funcionarios.
+     */
     public void funcionariosPorDepartamento(String departamento){
         
         funcionario = empresa.getFolhaPagamento().getFuncionarios();
@@ -152,6 +169,13 @@ public class InteracaoUsuario {
         }
     }
     
+    /**
+     * 
+     * @param lista 
+     * @param left
+     * @param right
+     * @return 
+     */
     private int partition(List<Funcionario> lista, int left, int right)
     {
         int i = left, j = right;
@@ -175,8 +199,12 @@ public class InteracaoUsuario {
         return i;
     }
 
- 
-
+    /**
+     * 
+     * @param lista
+     * @param left
+     * @param right 
+     */
     private void quickSort(List<Funcionario> lista, int left, int right) {
 
           int index = partition(lista, left, right);
