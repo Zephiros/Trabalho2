@@ -13,9 +13,10 @@ public class Diretor extends Regular
      * @see br.univali.poo.empresa.Regular
      * Construtor
      * @param salarioBase salario
+     * @param nome nome 
      */
-    public Diretor(float salarioBase) {
-        super(salarioBase);
+    public Diretor(float salarioBase, String nome) {
+        super(salarioBase, nome);
     }
     
     /**
@@ -23,9 +24,10 @@ public class Diretor extends Regular
      * Construtor
      * @param salarioBase salario
      * @param dataAdmissao data de admissao
+     * @param nome nome
      */
-    public Diretor(float salarioBase, Calendar dataAdmissao){
-        super(salarioBase, dataAdmissao);
+    public Diretor(float salarioBase, Calendar dataAdmissao, String nome){
+        super(salarioBase, dataAdmissao, nome);
     }
     
     /**

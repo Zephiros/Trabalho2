@@ -11,6 +11,7 @@ import br.univali.poo.empresa.Empresa;
 import br.univali.poo.empresa.Externo;
 import br.univali.poo.empresa.Funcionario;
 import br.univali.poo.empresa.Regular;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,11 @@ import java.util.List;
  */
 public class InteracaoUsuario {
     Empresa empresa;
-    List<Funcionario> funcionario;
+    List<Funcionario> funcionarios;
+    
+    public InteracaoUsuario(){
+        funcionarios = new ArrayList<>();
+    }
     
     /**
      * Verifica tipo de funcionario.
@@ -58,16 +63,7 @@ public class InteracaoUsuario {
      */
     public void incluirFuncionario(int tipo, float salario, String nome)
     {
-        empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario);
-        switch(tipo)
-            {
-                case 1: ((Regular) funcionario).setNome(nome);
-                    break;
-                case 2: ((Diretor) funcionario).setNome(nome);
-                    break;
-                case 3: ((Externo) funcionario).setNome(nome);
-                    break;
-            }
+        empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario, nome);
     }
     
     /**
@@ -76,22 +72,22 @@ public class InteracaoUsuario {
      */
     public void imprimirFolhaPagamento()
     {
-        funcionario = empresa.getFolhaPagamento().getFuncionarios();
+        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
   
-        for(int i = 0; i <= funcionario.size(); i++)
+        for(int i = 0; i <= funcionarios.size(); i++)
         {
-            int tipo = tipoFuncionario(funcionario.get(i));
+            int tipo = tipoFuncionario(funcionarios.get(i));
             
             switch(tipo)
             {
-                case 1: System.out.println("Nome: "+((Regular) funcionario.get(i)).getNome());
-                        System.out.println("Salario: "+((Regular) funcionario.get(i)).calculaSalarioLiquidoComDesconto());
+                case 1: System.out.println("Nome: "+((Regular) funcionarios.get(i)).getNome());
+                        System.out.println("Salario: "+((Regular) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
                     break;
-                case 2: System.out.println("Nome: "+((Diretor) funcionario.get(i)).getNome());
-                        System.out.println("Salario: "+((Diretor) funcionario.get(i)).calculaSalarioLiquidoComDesconto());
+                case 2: System.out.println("Nome: "+((Diretor) funcionarios.get(i)).getNome());
+                        System.out.println("Salario: "+((Diretor) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
                     break;
-                case 3: System.out.println("Nome: "+((Externo) funcionario.get(i)).getNome());
-                        System.out.println("Salario: "+((Externo) funcionario.get(i)).calculaSalarioLiquidoComDesconto());
+                case 3: System.out.println("Nome: "+((Externo) funcionarios.get(i)).getNome());
+                        System.out.println("Salario: "+((Externo) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
                     break;
             }
         }
@@ -116,25 +112,46 @@ public class InteracaoUsuario {
        System.out.println(empresa.getFolhaPagamento().totalFolhaPagamento());
     }
     
+    public void acrescentarHorasParaFuncionario(String nome, int horas)
+    {
+        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        
+        for(int i = 0; i <= funcionarios.size() - 1; i++)
+        {
+            int tipo = tipoFuncionario(funcionarios.get(i));
+            
+            switch(tipo)
+            {
+                case 1: ((Regular) funcionarios.get(i)).rolarTempo(horas);
+                    break;
+                case 2: ((Diretor) funcionarios.get(i)).rolarTempo(horas);
+                    break;
+                case 3:
+                default:
+                    break;
+            }
+        }
+    }
+    
     /**
      * Metodo que imprime o funcionário que recebe o maior salário.
      */
     public void maiorSalario()
     {
-        funcionario = empresa.getFolhaPagamento().getFuncionarios();
+        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
         
-        Funcionario func1 = funcionario.get(0);
-        Funcionario func2 = funcionario.get(1);
+        Funcionario func1 = funcionarios.get(0);
+        Funcionario func2 = funcionarios.get(1);
         int i = 1;
             
-        while(i <= funcionario.size())
+        while(i <= funcionarios.size())
         {   
             if(func1.calculaSalarioLiquidoComDesconto() > func2.calculaSalarioLiquidoComDesconto())
-                func2 = funcionario.get(i++);
+                func2 = funcionarios.get(i++);
             else
             {
                 func1 = func2;
-                func2 = funcionario.get(i++);
+                func2 = funcionarios.get(i++);
             }
         }
         switch(tipoFuncionario(func1))
@@ -157,9 +174,9 @@ public class InteracaoUsuario {
      */
     public void funcionariosPorDepartamento(String departamento){
         
-        funcionario = empresa.getFolhaPagamento().getFuncionarios();
+        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
         
-        for (Funcionario funcionario1 : funcionario) {
+        for (Funcionario funcionario1 : funcionarios) {
             int tipo = tipoFuncionario(funcionario1);
             switch (tipo) {
                 case 1:

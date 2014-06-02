@@ -1,9 +1,9 @@
 package br.univali.poo.empresa;
 
 import br.univali.poo.date.DateHandler;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Class Regular
@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class Regular implements Funcionario
 {
-    private String nome;
+    String nome;
     private String cpf;
     private String departamento;
     private Calendar dataAdmissao;
@@ -22,20 +22,28 @@ public class Regular implements Funcionario
     /**
      * Construtor que insere a data do dia para data de admissão.
      * @param salarioBase salario base do funcionario.
+     * @param nome nome do funcionario
      */
-    public Regular(float salarioBase){
+    public Regular(float salarioBase, String nome){
+        this.horaTrabalhada = 0;
         this.salarioBase = salarioBase;
         this.dataAdmissao = DateHandler.today();
+        this.nome = nome;
+        contraCheque = new ArrayList<>();
     }
     
     /**
      * Construtor que pode ser informada a data da admisão.
      * @param salarioBase salario base do funcionario.
      * @param dataAdmissao data de admissão do funcionario.
+     * @param nome nome do funcionario
      */
-    public Regular(float salarioBase, Calendar dataAdmissao){
+    public Regular(float salarioBase, Calendar dataAdmissao, String nome){
         this.salarioBase = salarioBase;
         this.dataAdmissao = dataAdmissao;
+        this.nome = nome;
+        this.horaTrabalhada = 0;
+        contraCheque = new ArrayList<>();
     }
     
     /**
@@ -165,6 +173,14 @@ public class Regular implements Funcionario
     }
     
     /**
+     * Metodo para incrementar horas pro Funcionario
+     * @param horas horas
+     */
+    public void rolarTempo(int horas){
+        setHoraTrabalhada(getHoraTrabalhada() + horas);
+    }
+    
+    /**
      * @see br.univali.poo.empresa.Funcionario
      * Metodo para calcular o valor de desconto do
      * imposto de Renda sobre um salario
@@ -229,7 +245,7 @@ public class Regular implements Funcionario
         else
             return getSalarioBase();
     }
-
+    
     /**
      * @see br.univali.poo.empresa.Funcionario
      * Metodo para calcular o salario liquido final de um funcionario
@@ -239,6 +255,8 @@ public class Regular implements Funcionario
     @Override
     public float calculaSalarioLiquidoComDesconto() {
         float salarioLiquidoInicial = calculaSalarioLiquido(getSalarioBase());
+        
+        System.out.println(getSalarioBase());
         return salarioLiquidoInicial - 
                 calculaImpostoDeRenda(salarioLiquidoInicial) - 
                 calculaINSS(salarioLiquidoInicial);

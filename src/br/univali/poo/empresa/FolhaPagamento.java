@@ -1,5 +1,8 @@
 package br.univali.poo.empresa;
 
+import br.univali.poo.date.DateHandler;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -11,6 +14,7 @@ public class FolhaPagamento
     private List<Funcionario> funcionario;
 
     public FolhaPagamento() {
+        this.funcionario = new ArrayList<>();
     }
     
     /**
@@ -26,18 +30,20 @@ public class FolhaPagamento
      * Insere um funcionario.
      * @param tipo [1]para Regular, [2]para Diretor e [3]para Externo.
      * @param salario salario do funcionario
+     * @param nome nome do funcionario
      */
-    public void cadastraFuncionario(int tipo, float salario)
+    public void cadastraFuncionario(int tipo, float salario, String nome)
     {        
         switch(tipo)
-        {
-            case 1: funcionario.add(new Regular(salario));
+        {  
+            case 1: 
+                this.funcionario.add(new Regular(salario, nome));
                 break;
                  
-            case 2: funcionario.add(new Diretor(salario));
+            case 2: funcionario.add(new Diretor(salario, nome));
                 break;
                   
-            case 3: funcionario.add(new Externo(salario));
+            case 3: funcionario.add(new Externo(salario, nome));
                 break;
                     
             default: break;
@@ -60,10 +66,11 @@ public class FolhaPagamento
     public float totalFolhaPagamento()
     {
         float total = 0;
-        for(int i = 0; i <= this.funcionario.size(); i++)
+        for(int i = 0; i <= this.funcionario.size() - 1; i++)
         {
-            total = total + funcionario.get(i).calculaSalarioLiquidoComDesconto();
+            total = total + this.funcionario.get(i).calculaSalarioLiquidoComDesconto();
         }
+        
         return total;
     }
     
@@ -73,6 +80,6 @@ public class FolhaPagamento
      */
     public boolean existeFuncionario()
     {
-        return funcionario != null;
+        return this.funcionario != null;
     }
 }

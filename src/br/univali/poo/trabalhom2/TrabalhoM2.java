@@ -28,7 +28,7 @@ public class TrabalhoM2 {
             + "[5]Valor total da folha de pagamento.\n"
             + "[6]Funcionário que recebe o maior salário.\n"
             + "[7]Imprimir todos os funcionários alocados em um determinado departamento da empresa.\n"
-            + "[8]\n");
+            + "[8]Rolar Tempo\n");
             escolha = Keyboard.readlnInt("O que você deseja fazer? (digite o numero da opção)");
 
             switch(escolha)
@@ -59,7 +59,10 @@ public class TrabalhoM2 {
                 case 7 : interacao.funcionariosPorDepartamento(Keyboard.readlnString("Digite o departamento: "));
                     break;
 
-                case 8 : 
+                case 8 :
+                    String nome = Keyboard.readlnString("Digite o nome: ");
+                    int horas = Keyboard.readlnInt("Digite o tempo em horas: ");
+                    interacao.acrescentarHorasParaFuncionario(nome, horas);
                     break;
             }
         }

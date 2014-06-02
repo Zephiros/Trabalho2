@@ -13,10 +13,12 @@ public class Externo implements Funcionario
     /**
      * Construtor
      * @param salarioL Funcionario Externo precisa de um salario inicial
+     * @param nome nome do funcionario
      */
-    Externo(float salarioL)
+    Externo(float salarioL, String nome)
     {
         this.salarioLiquido = salarioL;
+        this.nome = nome;
     }
     
     /**
