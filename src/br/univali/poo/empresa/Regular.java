@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Regular implements Funcionario
 {
-    String nome;
+    private String nome;
     private String cpf;
     private String departamento;
     private Calendar dataAdmissao;
