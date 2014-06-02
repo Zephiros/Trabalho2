@@ -256,7 +256,6 @@ public class Regular implements Funcionario
     public float calculaSalarioLiquidoComDesconto() {
         float salarioLiquidoInicial = calculaSalarioLiquido(getSalarioBase());
         
-        System.out.println(getSalarioBase());
         return salarioLiquidoInicial - 
                 calculaImpostoDeRenda(salarioLiquidoInicial) - 
                 calculaINSS(salarioLiquidoInicial);
