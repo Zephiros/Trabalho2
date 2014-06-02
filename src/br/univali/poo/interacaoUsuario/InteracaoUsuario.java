@@ -64,6 +64,7 @@ public class InteracaoUsuario {
     public void incluirFuncionario(int tipo, float salario, String nome)
     {
         empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario, nome);
+        //INCLUIR DEPARTAMENTO NO CONTRUTOR.
     }
     
     /**
@@ -72,24 +73,31 @@ public class InteracaoUsuario {
      */
     public void imprimirFolhaPagamento()
     {
-        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
-  
-        for(int i = 0; i <= funcionarios.size(); i++)
+        try
         {
-            int tipo = tipoFuncionario(funcionarios.get(i));
-            
-            switch(tipo)
+            funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        
+  
+            for(int i = 0; i <= funcionarios.size(); i++)
             {
-                case 1: System.out.println("Nome: "+((Regular) funcionarios.get(i)).getNome());
-                        System.out.println("Salario: "+((Regular) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
-                    break;
-                case 2: System.out.println("Nome: "+((Diretor) funcionarios.get(i)).getNome());
-                        System.out.println("Salario: "+((Diretor) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
-                    break;
-                case 3: System.out.println("Nome: "+((Externo) funcionarios.get(i)).getNome());
-                        System.out.println("Salario: "+((Externo) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
-                    break;
+                int tipo = tipoFuncionario(funcionarios.get(i));
+
+                switch(tipo)
+                {
+                    case 1: System.out.println("Nome: "+((Regular) funcionarios.get(i)).getNome());
+                            System.out.println("Salario: "+((Regular) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                        break;
+                    case 2: System.out.println("Nome: "+((Diretor) funcionarios.get(i)).getNome());
+                            System.out.println("Salario: "+((Diretor) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                        break;
+                    case 3: System.out.println("Nome: "+((Externo) funcionarios.get(i)).getNome());
+                            System.out.println("Salario: "+((Externo) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                        break;
+                }
             }
+        }catch(RuntimeException e)
+        {
+            System.out.println("Nao existe folha!");
         }
     }
     
@@ -99,8 +107,14 @@ public class InteracaoUsuario {
      */
     public void imprimirFolhaDePagamentoOrdemCrescente()
     {
-        List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
-        quickSort(lista, 0, lista.size() - 1);
+        try
+        {
+            List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
+            quickSort(lista, 0, lista.size() - 1);
+        }catch(RuntimeException e)
+        {
+            System.out.println("Nao existe folha de pagamento!");
+        }
     }
     
     /**
@@ -108,8 +122,14 @@ public class InteracaoUsuario {
      */
     public void totalFolhaPagamento()
     {
-       System.out.println("O total da folha de pagamento eh: ");
-       System.out.println(empresa.getFolhaPagamento().totalFolhaPagamento());
+       try
+       {
+           System.out.println("O total da folha de pagamento eh: ");
+           System.out.println(empresa.getFolhaPagamento().totalFolhaPagamento());
+       }catch(RuntimeException e)
+       {
+            System.out.println("Nao existe folha de pagamento!");
+        }
     }
     
     public void acrescentarHorasParaFuncionario(String nome, int horas)
@@ -138,20 +158,33 @@ public class InteracaoUsuario {
      */
     public void maiorSalario()
     {
-        funcionarios = empresa.getFolhaPagamento().getFuncionarios();
-        
-        Funcionario func1 = funcionarios.get(0);
-        Funcionario func2 = funcionarios.get(1);
-        int i = 1;
-            
-        while(i <= funcionarios.size())
-        {   
-            if(func1.calculaSalarioLiquidoComDesconto() > func2.calculaSalarioLiquidoComDesconto())
-                func2 = funcionarios.get(i++);
-            else
+        Funcionario func1 = null;
+        if(funcionarios.size() <= 1)
+        {
+            try
             {
-                func1 = func2;
-                func2 = funcionarios.get(i++);
+                func1 = funcionarios.get(0);
+            }catch(RuntimeException e)
+            {
+                System.out.println("Nao existe funcionario!");
+            }
+        }else
+        {
+            funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        
+            func1 = funcionarios.get(0);
+            Funcionario func2 = funcionarios.get(1);
+            int i = 1;
+
+            while(i <= funcionarios.size()-1)
+            {   
+                if(func1.calculaSalarioLiquidoComDesconto() > func2.calculaSalarioLiquidoComDesconto())
+                    func2 = funcionarios.get(i++);
+                else
+                {
+                    func1 = func2;
+                    func2 = funcionarios.get(i++);
+                }
             }
         }
         switch(tipoFuncionario(func1))
