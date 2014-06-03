@@ -95,28 +95,43 @@ public class InteracaoUsuario {
      */
     private void imprimirFolhaPagamento(List<Funcionario> lista)
     {
-        try
+        for(int i = 0; i < lista.size(); i++)
         {
-            for(int i = 0; i <= lista.size(); i++)
-            {
-                int tipo = tipoFuncionario(lista.get(i));
+            int tipo = tipoFuncionario(lista.get(i));
 
-                switch(tipo)
-                {
-                    case 1: System.out.println("Nome: "+((Regular) lista.get(i)).getNome());
-                            System.out.println("Salario: "+((Regular) lista.get(i)).calculaSalarioLiquidoComDesconto());
-                        break;
-                    case 2: System.out.println("Nome: "+((Diretor) lista.get(i)).getNome());
-                            System.out.println("Salario: "+((Diretor) lista.get(i)).calculaSalarioLiquidoComDesconto());
-                        break;
-                    case 3: System.out.println("Nome: "+((Externo) lista.get(i)).getNome());
-                            System.out.println("Salario: "+((Externo) lista.get(i)).calculaSalarioLiquidoComDesconto());
-                        break;
-                }
+            switch(tipo)
+            {
+                case 1: 
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Regular) lista.get(i)).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: "+((Regular) lista.get(i)).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex) {
+                        System.out.println("Nao existe salario!\n\n");
+                    }
+                    break;
+                case 2: 
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Diretor) lista.get(i)).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: "+((Diretor) lista.get(i)).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex) {
+                        System.out.println("Nao existe salario!\n\n");
+                    }
+                    break;
+                case 3: 
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Externo) lista.get(i)).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: " + ((Externo) lista.get(i)).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex) {
+                        System.out.println("Nao existe salario!\n\n");
+                    }
+                    break;
             }
-        }catch(RuntimeException e)
-        {
-            System.out.println("Nao existe folha!");
         }
     }
     
@@ -143,6 +158,8 @@ public class InteracaoUsuario {
        }catch(RuntimeException e)
        {
             System.out.println("Nao existe folha de pagamento!");
+        } catch (Exception ex) {
+            System.out.println("Nao existe salario!");
         }
     }
     
@@ -189,21 +206,49 @@ public class InteracaoUsuario {
             System.out.println("Nao existe funcionario!");
         }
         for(int i = 1;i < this.funcionarios.size();i++){
-            if(this.funcionarios.get(i).calculaSalarioLiquidoComDesconto() >
-                    maior.calculaSalarioLiquidoComDesconto())
-                maior = this.funcionarios.get(i);
+            try
+            {
+                if(this.funcionarios.get(i).calculaSalarioLiquidoComDesconto() >
+                        maior.calculaSalarioLiquidoComDesconto())
+                        maior = this.funcionarios.get(i);
+            } catch (Exception ex) {
+                System.out.println("Nao existe salario!");
+            }
         }
             switch(tipoFuncionario(maior))
             {
-                case 1: System.out.println("Nome: "+((Regular) maior).getNome());
-                        System.out.println("Salario: "+((Regular) maior).calculaSalarioLiquidoComDesconto());
+                case 1: 
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Regular) maior).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: " + ((Regular) maior).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex) {
+                        System.out.println("Nao existe salario!");
+                    }
                     break;
-                case 2: System.out.println("Nome: "+((Diretor) maior).getNome());
-                        System.out.println("Salario: "+((Diretor) maior).calculaSalarioLiquidoComDesconto());
+                case 2: 
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Diretor) maior).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: "+((Diretor) maior).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex) {
+                        System.out.println("Nao existe salario!");
+                    }
                     break;
-                case 3: System.out.println("Nome: "+((Externo) maior).getNome());
-                        System.out.println("Salario: "+((Externo) maior).calculaSalarioLiquidoComDesconto());
+                case 3:
+                    try
+                    {
+                        float salarioLiquidoDesconto = ((Externo) maior).calculaSalarioLiquidoComDesconto();
+                        System.out.println("Nome: " + ((Externo) maior).getNome());
+                        System.out.println("Salario: " + salarioLiquidoDesconto);
+                    } catch (Exception ex)
+                    {
+                        System.out.println("Nao existe salario!");
+                    }
                     break;
+                default: break;
             }
     }
     
@@ -243,19 +288,23 @@ public class InteracaoUsuario {
     private List<Funcionario> ordernaLista(List<Funcionario> listaf){
         if(listaf.size() == 1)
             return listaf;
-        else{
-            for(int i = 0;i < listaf.size();i++){
-                for(int j = 0;j < listaf.size();j++){
-                    if(listaf.get(i).calculaSalarioLiquidoComDesconto() < 
-                       listaf.get(j).calculaSalarioLiquidoComDesconto())
+        for(int i = 0;i < listaf.size();i++){
+            for(int j = 0;j < listaf.size();j++)
+            {
+                try
+                {
+                    if(listaf.get(i).calculaSalarioLiquidoComDesconto() <
+                        listaf.get(j).calculaSalarioLiquidoComDesconto())
                     {
                         Funcionario tmp = listaf.get(i);
                         listaf.set(i, listaf.get(j));
                         listaf.set(j, tmp);
                     }
+                } catch (Exception ex) {
+                    System.out.println("Nao existe salario!");
                 }
             }
-        }                
+        }
         return listaf;
     }    
 }

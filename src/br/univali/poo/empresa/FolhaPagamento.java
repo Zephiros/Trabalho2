@@ -2,6 +2,8 @@ package br.univali.poo.empresa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Informações e metodos referente a folha de pagamento da empresa
@@ -60,8 +62,9 @@ public class FolhaPagamento
     /**
      * Calcula o valor total da folha de pagamento.
      * @return valor total da folha de pagamento
+     * @throws java.lang.Exception
      */
-    public float totalFolhaPagamento()
+    public float totalFolhaPagamento() throws Exception
     {
         float total = 0;
         for(int i = 0; i <= this.funcionario.size() - 1; i++)

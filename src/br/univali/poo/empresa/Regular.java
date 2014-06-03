@@ -4,6 +4,7 @@ import br.univali.poo.date.DateHandler;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Class Regular
@@ -194,8 +195,11 @@ public class Regular implements Funcionario
      * @return valor do desconto
      */
     @Override
-    public float calculaImpostoDeRenda(float salario)
+    public float calculaImpostoDeRenda(float salario) throws Exception
     {
+        if(salario <= 0)
+            throw new Exception();
+        
         if(salario <= 1499.15f)
             return 0f;
         else
@@ -219,8 +223,11 @@ public class Regular implements Funcionario
      * @return valor de desconto
      */
     @Override
-    public float calculaINSS(float salario)
+    public float calculaINSS(float salario) throws Exception
     {
+        if(salario <= 0)
+            throw new Exception();
+        
         float taxa = (salario * 0.11f);
         if(taxa <= 482.93)
             return taxa;
@@ -228,6 +235,7 @@ public class Regular implements Funcionario
     }
     
     /**
+     * @throws java.lang.Exception
      * @see br.univali.poo.empresa.Funcionario;
      * Metodo para calcular o salario liquido de um Funcionario apartir de
      * um salario base. Base de horas - 160H
@@ -235,8 +243,11 @@ public class Regular implements Funcionario
      * @return valor do salario liquido
      */
     @Override
-    public float calculaSalarioLiquido(float salario)
+    public float calculaSalarioLiquido(float salario) throws Exception
     {
+        if(getHoraTrabalhada() <= 0)
+            throw new Exception();
+        
         float taxaHorario = (getHoraTrabalhada() * 100) / 160;
         if(taxaHorario <= 90)
             return (getSalarioBase() / 160) * getHoraTrabalhada();
@@ -253,7 +264,11 @@ public class Regular implements Funcionario
      * @return salario liquido final
      */
     @Override
-    public float calculaSalarioLiquidoComDesconto() {
+    public float calculaSalarioLiquidoComDesconto() throws Exception
+    {
+        if(getSalarioBase() <= 0)
+            throw new Exception();
+        
         float salarioLiquidoInicial = calculaSalarioLiquido(getSalarioBase());
         
         return salarioLiquidoInicial - 

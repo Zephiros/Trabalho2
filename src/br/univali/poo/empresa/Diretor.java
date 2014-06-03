@@ -33,8 +33,9 @@ public class Diretor extends Regular
     /**
      * Calcula o anuenio do diretor conforme seu tempo de serviço.
      * @return a porcentagem referente ao anuenio.
+     * @throws java.lang.Exception
      */
-    public float getAnuenio()
+    public float getAnuenio() throws Exception
     {
         int tempo = DateHandler.yearsFromToday(this.getDataAdmissao());
         if(tempo > 1 && tempo <= 40)
@@ -45,12 +46,14 @@ public class Diretor extends Regular
     }
     
     /**
+     * @throws java.lang.Exception
      * @see br.univali.poo.empresa.Regular
      * Metodo chama calcularSalarioLiquidoComDesconto e adiciona o bonus de diretor 
      * @return salario liquido final
      */
     @Override
-    public float calculaSalarioLiquidoComDesconto(){
+    public float calculaSalarioLiquidoComDesconto() throws Exception
+    {
         return super.calculaSalarioLiquidoComDesconto() + getAnuenio();
     }
 }
