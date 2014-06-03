@@ -68,6 +68,6 @@ public class Empresa
      */
     public boolean existeFolhaPagamento()
     {
-        return folhaPagamento != null;
+        return this.folhaPagamento != null;
     }
 }

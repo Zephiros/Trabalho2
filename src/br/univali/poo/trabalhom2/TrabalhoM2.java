@@ -38,10 +38,19 @@ public class TrabalhoM2 {
                 case 1 : interacao.criaEmpresa(Keyboard.readlnString("Digite o nome da empresa: "));
                     break;
 
-                case 2 : interacao.incluirFuncionario(Keyboard.readlnInt("Digite o tipo do "
-                        + "usuario [1]regular, [2]diretor e [3]externo"),
-                        Keyboard.readlnFloat("Digite o salario do funcionario: "),
-                        Keyboard.readlnString("Digite o nome do funcionario: "));
+                case 2 : 
+                        int tipo = Keyboard.readlnInt("Digite o tipo do usuario " +
+                                "[1]regular, [2]diretor e [3]externo");
+                        String nomeCadastro = Keyboard.readlnString("Digite o nome do funcionario: ");
+                        String cpf = Keyboard.readlnString("Digite o cpf do funcionario: ");
+                        float salario = Keyboard.readlnFloat("Digite o salario do funcionario: ");
+                        if(tipo == 1 || tipo == 2){
+                            String departamento = Keyboard.readlnString("Digite o departamento do funcionario: ");
+                            
+                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, departamento, cpf);
+                        } else {
+                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, null, cpf);
+                        }
                     break;
 
                 case 3 : interacao.imprimirFolhaPagamento();

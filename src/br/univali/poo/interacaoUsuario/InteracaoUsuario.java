@@ -60,10 +60,23 @@ public class InteracaoUsuario {
      * @param tipo tipo de funcionario [1]regular, [2]diretor e [3]externo.
      * @param salario salario base do funcionario
      * @param nome nome do funcionario.
+     * @param departamento
+     * @param cpf
      */
-    public void incluirFuncionario(int tipo, float salario, String nome)
+    public void incluirFuncionario(int tipo, float salario, String nome, String departamento, String cpf)
     {
         empresa.getFolhaPagamento().cadastraFuncionario(tipo, salario, nome);
+        Funcionario ultimo = empresa.getFolhaPagamento().getFuncionarios().get(
+                empresa.getFolhaPagamento().getQuantidadeFuncionario() - 1);
+        if(tipo == 1){
+            ((Regular)ultimo).setDepartamento(departamento);
+            ((Regular)ultimo).setCpf(cpf);
+        }else if(tipo == 2){
+            ((Diretor)ultimo).setDepartamento(departamento);
+            ((Diretor)ultimo).setCpf(cpf);
+        } else {
+            ((Externo)ultimo).setCpf(cpf);
+        }
         //INCLUIR DEPARTAMENTO NO CONTRUTOR.
     }
     
@@ -76,6 +89,10 @@ public class InteracaoUsuario {
         imprimirFolhaPagamento(this.funcionarios);
     }
     
+    /**
+     * Metodo private onde é passado como parametro uma lista e informado os dados da lista
+     * @param lista lista
+     */
     private void imprimirFolhaPagamento(List<Funcionario> lista)
     {
         try
@@ -129,6 +146,11 @@ public class InteracaoUsuario {
         }
     }
     
+    /**
+     * Metodo para acrescentar horas trabalhadas aos funcionarios
+     * @param nome nome do funcionario
+     * @param horas horas trabalhadas do funcionario
+     */
     public void acrescentarHorasParaFuncionario(String nome, int horas)
     {
         funcionarios = empresa.getFolhaPagamento().getFuncionarios();
@@ -228,6 +250,11 @@ public class InteracaoUsuario {
         }
     }
     
+    /**
+     * Metodo para ordenar uma lista com o salarioLiquidoComDesconto crescente
+     * @param listaf lista a ordernar
+     * @return lista ordenada
+     */
     private List<Funcionario> ordernaLista(List<Funcionario> listaf){
         if(listaf.size() == 1)
             return listaf;
