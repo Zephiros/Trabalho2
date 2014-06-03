@@ -179,47 +179,32 @@ public class InteracaoUsuario {
      */
     public void maiorSalario()
     {
-        Funcionario func1 = null;
-        if(funcionarios.size() <= 1)
+        this.funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        Funcionario maior = null;
+        try
         {
-            try
-            {
-                func1 = funcionarios.get(0);
-            }catch(RuntimeException e)
-            {
-                System.out.println("Nao existe funcionario!");
-            }
-        }else
+            maior = this.funcionarios.get(0);
+        }catch(RuntimeException e)
         {
-            funcionarios = empresa.getFolhaPagamento().getFuncionarios();
-        
-            func1 = funcionarios.get(0);
-            Funcionario func2 = funcionarios.get(1);
-            int i = 1;
-
-            while(i <= funcionarios.size()-1)
-            {   
-                if(func1.calculaSalarioLiquidoComDesconto() > func2.calculaSalarioLiquidoComDesconto())
-                    func2 = funcionarios.get(i++);
-                else
-                {
-                    func1 = func2;
-                    func2 = funcionarios.get(i++);
-                }
-            }
+            System.out.println("Nao existe funcionario!");
         }
-        switch(tipoFuncionario(func1))
-        {
-            case 1: System.out.println("Nome: "+((Regular) func1).getNome());
-                    System.out.println("Salario: "+((Regular) func1).calculaSalarioLiquidoComDesconto());
-                break;
-            case 2: System.out.println("Nome: "+((Diretor) func1).getNome());
-                    System.out.println("Salario: "+((Diretor) func1).calculaSalarioLiquidoComDesconto());
-                break;
-            case 3: System.out.println("Nome: "+((Externo) func1).getNome());
-                    System.out.println("Salario: "+((Externo) func1).calculaSalarioLiquidoComDesconto());
-                break;
+        for(int i = 1;i < this.funcionarios.size();i++){
+            if(this.funcionarios.get(i).calculaSalarioLiquidoComDesconto() >
+                    maior.calculaSalarioLiquidoComDesconto())
+                maior = this.funcionarios.get(i);
         }
+            switch(tipoFuncionario(maior))
+            {
+                case 1: System.out.println("Nome: "+((Regular) maior).getNome());
+                        System.out.println("Salario: "+((Regular) maior).calculaSalarioLiquidoComDesconto());
+                    break;
+                case 2: System.out.println("Nome: "+((Diretor) maior).getNome());
+                        System.out.println("Salario: "+((Diretor) maior).calculaSalarioLiquidoComDesconto());
+                    break;
+                case 3: System.out.println("Nome: "+((Externo) maior).getNome());
+                        System.out.println("Salario: "+((Externo) maior).calculaSalarioLiquidoComDesconto());
+                    break;
+            }
     }
     
     /**
