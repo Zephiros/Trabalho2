@@ -71,27 +71,29 @@ public class InteracaoUsuario {
      * Metodo que realiza a impressão da folha de pagamento 
      * informando o nome dos funcionários e o seus respectivos salários.
      */
-    public void imprimirFolhaPagamento()
+    public void imprimirFolhaPagamento(){
+        this.funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        imprimirFolhaPagamento(this.funcionarios);
+    }
+    
+    private void imprimirFolhaPagamento(List<Funcionario> lista)
     {
         try
         {
-            funcionarios = empresa.getFolhaPagamento().getFuncionarios();
-        
-  
-            for(int i = 0; i <= funcionarios.size(); i++)
+            for(int i = 0; i <= lista.size(); i++)
             {
-                int tipo = tipoFuncionario(funcionarios.get(i));
+                int tipo = tipoFuncionario(lista.get(i));
 
                 switch(tipo)
                 {
-                    case 1: System.out.println("Nome: "+((Regular) funcionarios.get(i)).getNome());
-                            System.out.println("Salario: "+((Regular) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                    case 1: System.out.println("Nome: "+((Regular) lista.get(i)).getNome());
+                            System.out.println("Salario: "+((Regular) lista.get(i)).calculaSalarioLiquidoComDesconto());
                         break;
-                    case 2: System.out.println("Nome: "+((Diretor) funcionarios.get(i)).getNome());
-                            System.out.println("Salario: "+((Diretor) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                    case 2: System.out.println("Nome: "+((Diretor) lista.get(i)).getNome());
+                            System.out.println("Salario: "+((Diretor) lista.get(i)).calculaSalarioLiquidoComDesconto());
                         break;
-                    case 3: System.out.println("Nome: "+((Externo) funcionarios.get(i)).getNome());
-                            System.out.println("Salario: "+((Externo) funcionarios.get(i)).calculaSalarioLiquidoComDesconto());
+                    case 3: System.out.println("Nome: "+((Externo) lista.get(i)).getNome());
+                            System.out.println("Salario: "+((Externo) lista.get(i)).calculaSalarioLiquidoComDesconto());
                         break;
                 }
             }
@@ -107,14 +109,9 @@ public class InteracaoUsuario {
      */
     public void imprimirFolhaDePagamentoOrdemCrescente()
     {
-        try
-        {
-            List<Funcionario> lista = empresa.getFolhaPagamento().getFuncionarios();
-            quickSort(lista, 0, lista.size() - 1);
-        }catch(RuntimeException e)
-        {
-            System.out.println("Nao existe folha de pagamento!");
-        }
+        this.funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+        List<Funcionario> copy = ordernaLista(this.funcionarios);
+        imprimirFolhaPagamento(copy);
     }
     
     /**
@@ -136,17 +133,19 @@ public class InteracaoUsuario {
     {
         funcionarios = empresa.getFolhaPagamento().getFuncionarios();
         
-        for(int i = 0; i <= funcionarios.size() - 1; i++)
-        {
-            int tipo = tipoFuncionario(funcionarios.get(i));
-            
-            switch(tipo)
-            {
-                case 1: ((Regular) funcionarios.get(i)).rolarTempo(horas);
+        for (Funcionario funcionario : funcionarios) {
+            int tipo = tipoFuncionario(funcionario);
+            switch (tipo) {
+                case 1:
+                    if (((Regular) funcionario).getNome().equals(nome)) {
+                        ((Regular) funcionario).rolarTempo(horas);
+                    }
                     break;
-                case 2: ((Diretor) funcionarios.get(i)).rolarTempo(horas);
+                case 2:
+                    if (((Diretor) funcionario).getNome().equals(nome)) {
+                        ((Diretor) funcionario).rolarTempo(horas);
+                    }
                     break;
-                case 3:
                 default:
                     break;
             }
@@ -229,49 +228,22 @@ public class InteracaoUsuario {
         }
     }
     
-    /**
-     * 
-     * @param lista 
-     * @param left
-     * @param right
-     * @return 
-     */
-    private int partition(List<Funcionario> lista, int left, int right)
-    {
-        int i = left, j = right;
-        Funcionario tmp;
-          
-        Funcionario pivot = lista.get((left + right) / 2);
-
-        while (i <= j) {
-                while (lista.get(i).calculaSalarioLiquidoComDesconto() < pivot.calculaSalarioLiquidoComDesconto())
-                      i++;
-                while (lista.get(i).calculaSalarioLiquidoComDesconto() > pivot.calculaSalarioLiquidoComDesconto())
-                      j--;
-                if (i <= j) {
-                    tmp = lista.get(i);     
-                    lista.set(i, lista.get(j));
-                    lista.set(j, tmp);
-                    i++;
-                    j--;
+    private List<Funcionario> ordernaLista(List<Funcionario> listaf){
+        if(listaf.size() == 1)
+            return listaf;
+        else{
+            for(int i = 0;i < listaf.size();i++){
+                for(int j = 0;j < listaf.size();j++){
+                    if(listaf.get(i).calculaSalarioLiquidoComDesconto() < 
+                       listaf.get(j).calculaSalarioLiquidoComDesconto())
+                    {
+                        Funcionario tmp = listaf.get(i);
+                        listaf.set(i, listaf.get(j));
+                        listaf.set(j, tmp);
+                    }
                 }
-        }
-        return i;
-    }
-
-    /**
-     * 
-     * @param lista
-     * @param left
-     * @param right 
-     */
-    private void quickSort(List<Funcionario> lista, int left, int right) {
-
-          int index = partition(lista, left, right);
-
-          if (left < index - 1)
-                quickSort(lista, left, index - 1);
-          if (index < right)
-                quickSort(lista, index, right);
-    }
+            }
+        }                
+        return listaf;
+    }    
 }
