@@ -33,39 +33,49 @@ public class TrabalhoM2 {
 
             switch(escolha)
             {
-                case 0 : System.exit(0);
+                case 0 : 
+                    System.exit(0);
                 
-                case 1 : interacao.criaEmpresa(Keyboard.readlnString("Digite o nome da empresa: "));
+                case 1 : 
+                    interacao.criaEmpresa(Keyboard.readlnString("Digite o nome da empresa: "));
                     break;
 
                 case 2 : 
                         int tipo = Keyboard.readlnInt("Digite o tipo do usuario " +
                                 "[1]regular, [2]diretor e [3]externo");
-                        String nomeCadastro = Keyboard.readlnString("Digite o nome do funcionario: ");
-                        String cpf = Keyboard.readlnString("Digite o cpf do funcionario: ");
-                        float salario = Keyboard.readlnFloat("Digite o salario do funcionario: ");
-                        if(tipo == 1 || tipo == 2){
-                            String departamento = Keyboard.readlnString("Digite o departamento do funcionario: ");
-                            
-                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, departamento, cpf);
-                        } else {
-                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, null, cpf);
-                        }
+                        do
+                        {
+                            String nomeCadastro = Keyboard.readlnString("Digite o nome do funcionario: ");
+                            String cpf = Keyboard.readlnString("Digite o cpf do funcionario: ");
+                            float salario = Keyboard.readlnFloat("Digite o salario do funcionario: ");
+                            if(tipo == 1 || tipo == 2){
+                                String departamento = Keyboard.readlnString("Digite o departamento do funcionario: ");
+
+                                interacao.incluirFuncionario(tipo, salario, nomeCadastro, departamento, cpf);
+                            } else {
+                                interacao.incluirFuncionario(tipo, salario, nomeCadastro, null, cpf);
+                            }
+                        }while(tipo < 1 || tipo > 3);
                     break;
 
-                case 3 : interacao.imprimirFolhaPagamento();
+                case 3 : 
+                    interacao.imprimirFolhaPagamento();
                     break;
 
-                case 4 : interacao.imprimirFolhaDePagamentoOrdemCrescente();
+                case 4 : 
+                    interacao.imprimirFolhaDePagamentoOrdemCrescente();
                     break;
 
-                case 5 : interacao.totalFolhaPagamento();
+                case 5 : 
+                    interacao.totalFolhaPagamento();
                     break;
 
-                case 6 : interacao.maiorSalario();
+                case 6 : 
+                    interacao.maiorSalario();
                     break;
 
-                case 7 : interacao.funcionariosPorDepartamento(Keyboard.readlnString("Digite o departamento: "));
+                case 7 : 
+                    interacao.funcionariosPorDepartamento(Keyboard.readlnString("Digite o departamento: "));
                     break;
 
                 case 8 :
