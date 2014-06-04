@@ -41,21 +41,27 @@ public class TrabalhoM2 {
                     break;
 
                 case 2 : 
-                        int tipo = Keyboard.readlnInt("Digite o tipo do usuario " +
-                                "[1]regular, [2]diretor e [3]externo");
+                    int tipo = Keyboard.readlnInt("Digite o tipo do usuario " +
+                            "[1]regular, [2]diretor e [3]externo");
+                    do
+                    {
+                        String nomeCadastro = Keyboard.readlnString("Digite o nome do funcionario: ");
+                        String cpf = Keyboard.readlnString("Digite o cpf do funcionario: ");
+
+                        float salario;
                         do
                         {
-                            String nomeCadastro = Keyboard.readlnString("Digite o nome do funcionario: ");
-                            String cpf = Keyboard.readlnString("Digite o cpf do funcionario: ");
-                            float salario = Keyboard.readlnFloat("Digite o salario do funcionario: ");
-                            if(tipo == 1 || tipo == 2){
-                                String departamento = Keyboard.readlnString("Digite o departamento do funcionario: ");
+                            salario = Keyboard.readlnFloat("Digite o salario do funcionario: ");
+                        }while(salario <= 0);
 
-                                interacao.incluirFuncionario(tipo, salario, nomeCadastro, departamento, cpf);
-                            } else {
-                                interacao.incluirFuncionario(tipo, salario, nomeCadastro, null, cpf);
-                            }
-                        }while(tipo < 1 || tipo > 3);
+                        if(tipo == 1 || tipo == 2){
+                            String departamento = Keyboard.readlnString("Digite o departamento do funcionario: ");
+
+                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, departamento, cpf);
+                        } else {
+                            interacao.incluirFuncionario(tipo, salario, nomeCadastro, null, cpf);
+                        }
+                    }while(tipo < 1 || tipo > 3);
                     break;
 
                 case 3 : 
@@ -80,8 +86,12 @@ public class TrabalhoM2 {
 
                 case 8 :
                     String nome = Keyboard.readlnString("Digite o nome: ");
-                    int horas = Keyboard.readlnInt("Digite o tempo em horas: ");
-                    interacao.acrescentarHorasParaFuncionario(nome, horas);
+                    int horas;
+                    do
+                    {
+                        horas = Keyboard.readlnInt("Digite o tempo em horas: ");
+                        interacao.acrescentarHorasParaFuncionario(nome, horas);
+                    }while(horas <= 0);
                     break;
             }
         }

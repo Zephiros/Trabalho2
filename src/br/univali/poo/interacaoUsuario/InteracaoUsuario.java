@@ -52,7 +52,10 @@ public class InteracaoUsuario {
      */
     public void criaEmpresa(String nome)
     {
-        this.empresa = new Empresa(nome);
+        if(this.empresa != null)
+            System.out.println("Empresa ja existe!");
+        else
+            this.empresa = new Empresa(nome);
     }
     
     /**
@@ -77,16 +80,25 @@ public class InteracaoUsuario {
         } else {
             ((Externo)ultimo).setCpf(cpf);
         }
-        //INCLUIR DEPARTAMENTO NO CONTRUTOR.
     }
     
     /**
      * Metodo que realiza a impressão da folha de pagamento 
      * informando o nome dos funcionários e o seus respectivos salários.
      */
-    public void imprimirFolhaPagamento(){
-        this.funcionarios = empresa.getFolhaPagamento().getFuncionarios();
-        imprimirFolhaPagamento(this.funcionarios);
+    public void imprimirFolhaPagamento()
+    {
+        if(empresa == null)
+            System.out.println("Nao existe empresa");
+        else
+            if(empresa.getFolhaPagamento() == null)
+                System.out.println("Nao existe folha de pagamento");
+        else
+            if(empresa.getFolhaPagamento().getFuncionarios() == null)
+                System.out.println("Nao existe funcionarios");
+        else
+            this.funcionarios = empresa.getFolhaPagamento().getFuncionarios();
+            imprimirFolhaPagamento(this.funcionarios);
     }
     
     /**
@@ -172,16 +184,20 @@ public class InteracaoUsuario {
     {
         funcionarios = empresa.getFolhaPagamento().getFuncionarios();
         
-        for (Funcionario funcionario : funcionarios) {
+        for (Funcionario funcionario : funcionarios)
+        {
             int tipo = tipoFuncionario(funcionario);
-            switch (tipo) {
+            switch (tipo)
+            {
                 case 1:
-                    if (((Regular) funcionario).getNome().equals(nome)) {
+                    if (((Regular) funcionario).getNome().equals(nome))
+                    {
                         ((Regular) funcionario).rolarTempo(horas);
                     }
                     break;
                 case 2:
-                    if (((Diretor) funcionario).getNome().equals(nome)) {
+                    if (((Diretor) funcionario).getNome().equals(nome))
+                    {
                         ((Diretor) funcionario).rolarTempo(horas);
                     }
                     break;
@@ -205,15 +221,17 @@ public class InteracaoUsuario {
         {
             System.out.println("Nao existe funcionario!");
         }
-        for(int i = 1;i < this.funcionarios.size();i++){
+        for(int i = 1;i < this.funcionarios.size();i++)
+        {
             try
             {
                 if(this.funcionarios.get(i).calculaSalarioLiquidoComDesconto() >
                         maior.calculaSalarioLiquidoComDesconto())
                         maior = this.funcionarios.get(i);
-            } catch (Exception ex) {
+            } catch (Exception ex)
+              {
                 System.out.println("Nao existe salario!");
-            }
+              }
         }
             switch(tipoFuncionario(maior))
             {
@@ -256,20 +274,25 @@ public class InteracaoUsuario {
      * Metodo que imprime todos os funcionários alocados em um determinado departamento da empresa.
      * @param departamento departamento que deseja ver os funcionarios.
      */
-    public void funcionariosPorDepartamento(String departamento){
+    public void funcionariosPorDepartamento(String departamento)
+    {
         
         funcionarios = empresa.getFolhaPagamento().getFuncionarios();
         
-        for (Funcionario funcionario1 : funcionarios) {
+        for (Funcionario funcionario1 : funcionarios)
+        {
             int tipo = tipoFuncionario(funcionario1);
-            switch (tipo) {
+            switch (tipo)
+            {
                 case 1:
-                    if (((Regular) funcionario1).getDepartamento().equalsIgnoreCase(departamento)) {
+                    if (((Regular) funcionario1).getDepartamento().equalsIgnoreCase(departamento))
+                    {
                         System.out.println("Nome: " + ((Regular) funcionario1).getNome());
                     }
                     break;
                 case 2:
-                    if (((Diretor) funcionario1).getDepartamento().equalsIgnoreCase(departamento)) {
+                    if (((Diretor) funcionario1).getDepartamento().equalsIgnoreCase(departamento))
+                    {
                         System.out.println("Nome: " + ((Diretor) funcionario1).getNome());
                     }
                     break;
@@ -285,10 +308,12 @@ public class InteracaoUsuario {
      * @param listaf lista a ordernar
      * @return lista ordenada
      */
-    private List<Funcionario> ordernaLista(List<Funcionario> listaf){
+    private List<Funcionario> ordernaLista(List<Funcionario> listaf)
+    {
         if(listaf.size() == 1)
             return listaf;
-        for(int i = 0;i < listaf.size();i++){
+        for(int i = 0;i < listaf.size();i++)
+        {
             for(int j = 0;j < listaf.size();j++)
             {
                 try
@@ -300,9 +325,10 @@ public class InteracaoUsuario {
                         listaf.set(i, listaf.get(j));
                         listaf.set(j, tmp);
                     }
-                } catch (Exception ex) {
+                } catch (Exception ex)
+                  {
                     System.out.println("Nao existe salario!");
-                }
+                  }
             }
         }
         return listaf;
